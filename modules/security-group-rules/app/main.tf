@@ -1,6 +1,6 @@
 resource "aws_vpc_security_group_ingress_rule" "app_from_alb" {
   security_group_id = var.security_group_id
-  referenced_security_group_id = var.source_security_group_id
+  referenced_security_group_id = var.alb_security_group_id
   from_port         = var.app_port
   to_port           = var.app_port
   ip_protocol       = "tcp"
