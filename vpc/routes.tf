@@ -79,3 +79,20 @@ resource "aws_route_table_association" "private" {
   subnet_id = element(aws_subnet.private[*].id,count.index)
   route_table_id = aws_route_table.private[count.index].id
 }
+
+# DB RTs (no outbound internet)
+resource "aws_route_table" "db" {
+  count = length(var.db_subnets)
+
+  vpc_id = aws_vpc.this.id
+
+  tags = merge(var.tags, {
+    Name = "${var.vpc_name}-db-rt-${count.index}"
+  })
+}
+
+resource "aws_route_table_association" "db" {
+  count          = length(aws_subnet.db)
+  subnet_id      = aws_subnet.db[count.index].id
+  route_table_id = aws_route_table.db[count.index].id
+}
