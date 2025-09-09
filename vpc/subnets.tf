@@ -6,9 +6,6 @@ resource "aws_subnet" "private"{
     cidr_block        = var.private_subnets[count.index]
     availability_zone = var.azs[count.index]
 
-    assign_ipv6_address_on_creation = var.enable_ipv6
-    ipv6_cidr_block = var.enable_ipv6 ? var.private_subnets_ipv6[count.index] : null
-
     tags = merge(
       var.tags, 
       {
@@ -26,9 +23,6 @@ resource "aws_subnet" "public"{
     availability_zone = var.azs[count.index]
     map_public_ip_on_launch = true
 
-    assign_ipv6_address_on_creation = var.enable_ipv6
-    ipv6_cidr_block = var.enable_ipv6 ? local.public_subnet_ipv6_cidrs[count.index] : null
-    
     tags = merge(
       var.tags, 
       {

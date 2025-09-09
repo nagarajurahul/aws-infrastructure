@@ -24,10 +24,3 @@ variable "tags" {
 
   default     = { "Environment" =  "Production" }
 }
-
-variable "enable_ipv6" {
-  description = "Enable ipv6 for VPC and subnets"
-  type = bool
-
-  default = false
-}
