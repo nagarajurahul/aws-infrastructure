@@ -13,7 +13,6 @@ resource "aws_internet_gateway" "igw" {
 # NAT Gateways (One per AZ if enabled)
 resource "aws_eip" "nat" {
   count = var.enable_nat_gateway ? length(var.public_subnets) : 0
-  vpc   = true
 }
 
 resource "aws_nat_gateway" "nat" {
@@ -70,7 +69,7 @@ resource "aws_route" "private_nat_gateway" {
 
   route_table_id         = aws_route_table.private[count.index].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = element(aws_nat_gateway.this[*].id, count.index)
+  nat_gateway_id         = element(aws_nat_gateway.nat[*].id, count.index)
 }
 
 resource "aws_route_table_association" "private" {
