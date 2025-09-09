@@ -34,14 +34,18 @@ variable "enable_nat_gateway" {
 
 variable "azs" { 
     type = list(string) 
+    description = "Availability Zones"
 }
 
 variable "public_subnets" { 
     type = list(string) 
+    description = "Public Subnet CIDRs"
 }
 variable "private_subnets" { 
     type = list(string) 
+    description = "Private Subnet CIDRs"
 }
 variable "db_subnets" { 
     type = list(string) 
+    description = "DB Subnet CIDRs"
 }
