@@ -5,7 +5,7 @@ resource "aws_vpc_security_group_ingress_rule" "https_ipv4" {
   from_port         = 443
   to_port           = 443
   ip_protocol       = "tcp"
-  description = "Allow HTTPS inbound access to ALB - ipv4"
+  description = "Allow HTTPS inbound traffic access to ALB - ipv4"
 }
 
 
