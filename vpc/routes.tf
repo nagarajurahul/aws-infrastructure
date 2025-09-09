@@ -51,6 +51,7 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
+# Private route
 resource "aws_route_table" "private" {
   count = length(var.private_subnets)
 
@@ -59,7 +60,7 @@ resource "aws_route_table" "private" {
   tags= merge(
     var.tags, 
     {
-      Name = "${var.vpc_name}-private-rt"
+      Name = "${var.vpc_name}-private-rt-${count.index}"
     }
   )
 }
