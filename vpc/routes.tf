@@ -84,15 +84,19 @@ resource "aws_route_table_association" "private" {
 resource "aws_route_table" "db" {
   count = length(var.db_subnets)
 
-  vpc_id = aws_vpc.this.id
+  vpc_id = aws_vpc.main.id
 
-  tags = merge(var.tags, {
+  tags = merge(
+    var.tags, 
+    {
     Name = "${var.vpc_name}-db-rt-${count.index}"
-  })
+    }
+  )
 }
 
 resource "aws_route_table_association" "db" {
   count          = length(aws_subnet.db)
-  subnet_id      = aws_subnet.db[count.index].id
+
+  subnet_id = element(aws_subnet.db[*].id,count.index)
   route_table_id = aws_route_table.db[count.index].id
 }
