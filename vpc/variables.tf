@@ -24,3 +24,24 @@ variable "tags" {
 
   default     = { "Environment" =  "Production" }
 }
+
+variable "enable_nat_gateway" {
+  description = "Enable NAT Gateway for private subnets"
+  type        = bool
+  
+  default     = true
+}
+
+variable "azs" { 
+    type = list(string) 
+}
+
+variable "public_subnets" { 
+    type = list(string) 
+}
+variable "private_subnets" { 
+    type = list(string) 
+}
+variable "db_subnets" { 
+    type = list(string) 
+}
