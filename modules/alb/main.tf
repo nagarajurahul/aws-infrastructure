@@ -24,7 +24,13 @@ resource "aws_lb" "alb" {
 
   access_logs {
     bucket  = var.s3_bucket_id
-    prefix  = "${var.alb_name}-alb"
+    prefix  = "${var.alb_name}-alb-access"
+    enabled = true
+  }
+
+  connection_logs {
+    bucket  = var.s3_bucket_id
+    prefix  = "${var.alb_name}-alb-connection"
     enabled = true
   }
 
