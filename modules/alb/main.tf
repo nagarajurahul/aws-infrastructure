@@ -18,12 +18,12 @@ resource "aws_lb" "alb" {
   internal           = var.internal
   load_balancer_type = "application"
   security_groups    = [module.security_group.security_group_id.id]
-  subnets            = [for subnet in subnets : subnet.id]
+  subnets            = [for subnet in var.subnets : subnet.id]
 
   enable_deletion_protection = true
 
   access_logs {
-    bucket  = s3_bucket_id
+    bucket  = var.s3_bucket_id
     prefix  = "${var.alb_name}-alb"
     enabled = true
   }
