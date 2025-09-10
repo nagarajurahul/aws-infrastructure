@@ -1,3 +1,9 @@
+module "iam" {
+    source = "../iam"
+
+    type   = "app"
+}
+
 module "launch_template" {
   source = "../launch-template"
 
@@ -6,7 +12,7 @@ module "launch_template" {
   ami_id                    = var.ami_id
   instance_type             = var.instance_type
   vpc_security_group_ids    = var.vpc_security_group_ids
-  iam_instance_profile_name = var.iam_instance_profile_name
+  iam_instance_profile_name = module.iam.iam_instance_profile_name
   hibernation_mode          = var.hibernation_mode
   key_name                  = var.key_name
   user_data                 = var.user_data
