@@ -1,6 +1,6 @@
-variable "type" { 
-    description = "Type of the application"
-    type = string
+variable "type" {
+  description = "Type of the application"
+  type        = string
 }
 
 variable "managed_policy_arns" {
