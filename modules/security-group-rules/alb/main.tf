@@ -1,10 +1,10 @@
 resource "aws_vpc_security_group_ingress_rule" "https_ipv4" {
   security_group_id = var.security_group_id
   cidr_ipv4         = var.alb_ingress_cidr
-  from_port         = 443
-  to_port           = 443
+  from_port         = 80
+  to_port           = 80
   ip_protocol       = "tcp"
-  description = "Allow HTTPS inbound traffic access to ALB - ipv4"
+  description = "Allow HTTP inbound traffic access to ALB - ipv4"
 }
 
 
