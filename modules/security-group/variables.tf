@@ -10,5 +10,5 @@ variable "tags" {
 
 variable "type" {
   description = "Type of the security group"
-  type = string
+  type        = string
 }
