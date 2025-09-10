@@ -17,3 +17,8 @@ output "app_green_target_group_arn" {
   description = "ARN of the Target Group"
   value       = aws_lb_target_group.app_green.arn
 }
+
+output "alb_security_group_id" {
+  description = "Security Group of the ALB"
+  value       =  module.security_group.security_group_id
+}

@@ -17,14 +17,20 @@ resource "aws_lb" "alb" {
   name               = "${var.alb_name}-alb"
   internal           = var.internal
   load_balancer_type = "application"
-  security_groups    = [module.security_group.security_group_id.id]
-  subnets            = [for subnet in var.subnets : subnet.id]
+  security_groups    = [module.security_group.security_group_id]
+  subnets            = var.subnets
 
   enable_deletion_protection = var.alb_enable_deletion_protection
 
   access_logs {
     bucket  = var.s3_bucket_id
-    prefix  = "${var.alb_name}-alb"
+    prefix  = "${var.alb_name}-alb-access"
+    enabled = true
+  }
+
+  connection_logs {
+    bucket  = var.s3_bucket_id
+    prefix  = "${var.alb_name}-alb-connection"
     enabled = true
   }
 
@@ -37,15 +43,14 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "app_blue" {
-  name        = "${var.alb_name}-app_blue-tg"
+  name        = "${var.alb_name}-app-blue-tg"
   target_type = "instance"
   port        = var.target_port
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
   target_health_state {
     enable_unhealthy_connection_termination = true
-    unhealthy_draining_interval             = var.unhealthy_draining_interval
   }
 
   tags = merge(
@@ -57,15 +62,14 @@ resource "aws_lb_target_group" "app_blue" {
 }
 
 resource "aws_lb_target_group" "app_green" {
-  name        = "${var.alb_name}-app_green-tg"
+  name        = "${var.alb_name}-app-green-tg"
   target_type = "instance"
   port        = var.target_port
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
   target_health_state {
     enable_unhealthy_connection_termination = true
-    unhealthy_draining_interval             = var.unhealthy_draining_interval
   }
 
   tags = merge(
@@ -78,10 +82,8 @@ resource "aws_lb_target_group" "app_green" {
 
 resource "aws_lb_listener" "app" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+  port              = "80"
+  protocol          = "HTTP"
 
   default_action {
     type = "forward"

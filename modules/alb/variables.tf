@@ -44,10 +44,3 @@ variable "target_port" {
 
   default = 8080
 }
-
-variable "unhealthy_draining_interval" {
-  description = "unhealthy_draining_interval"
-  type        = number
-
-  default = 60
-}
