@@ -37,18 +37,18 @@ module "alb" {
 }
 
 module "asg" {
-  tags                      = var.tags
-  type                      = var.type
-  ami_id                    = var.ami_id
-  instance_type             = var.instance_type
-  hibernation_mode          = var.hibernation_mode
-  key_name                  = var.key_name
-  user_data                 = var.user_data
+  tags             = var.tags
+  type             = var.type
+  ami_id           = var.ami_id
+  instance_type    = var.instance_type
+  hibernation_mode = var.hibernation_mode
+  key_name         = var.key_name
+  user_data        = var.user_data
 
-  asg_name         = var.asg_name
-  subnets          = module.vpc.private_subnets
-  desired_capacity = var.desired_capacity
-  max_size         = var.max_size
-  min_size         = var.min_size
+  asg_name          = var.asg_name
+  subnets           = module.vpc.private_subnets
+  desired_capacity  = var.desired_capacity
+  max_size          = var.max_size
+  min_size          = var.min_size
   target_group_arns = [module.alb.app_blue_target_group_arn]
 }
