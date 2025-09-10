@@ -10,7 +10,7 @@ module "security_group_rules"{
     source = "../security-group-rules/alb"
 
     security_group_id = module.security_group.security_group_id
-    alb_ingress_cidrs = var.alb_ingress_cidrs
+    alb_ingress_cidr = var.alb_ingress_cidr
 }
 
 resource "aws_lb" "alb" {

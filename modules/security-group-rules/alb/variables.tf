@@ -3,7 +3,7 @@ variable "security_group_id" {
     type = string
 }
 
-variable "alb_ingress_cidrs" {
-  description = "CIDR blocks allowed to access the ALB"
-  type        = list(string)
+variable "alb_ingress_cidr" {
+  description = "CIDR block allowed to access the ALB"
+  type        = string
 }

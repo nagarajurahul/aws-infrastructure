@@ -23,9 +23,9 @@ variable "subnets" {
   type        = list(string)    
 }
 
-variable "alb_ingress_cidrs" {
+variable "alb_ingress_cidr" {
   description = "CIDR blocks allowed to access the ALB"
-  type        = list(string)
+  type        = string
 }
 
 variable "s3_bucket_id" {
