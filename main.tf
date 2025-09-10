@@ -37,6 +37,8 @@ module "alb" {
 }
 
 module "asg" {
+  source = "./modules/asg"
+
   tags             = var.tags
   type             = var.type
   ami_id           = var.ami_id
