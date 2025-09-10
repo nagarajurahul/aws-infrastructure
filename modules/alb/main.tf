@@ -17,7 +17,7 @@ resource "aws_lb" "alb" {
   name               = "${var.alb_name}-alb"
   internal           = var.internal
   load_balancer_type = "application"
-  security_groups    = [module.security_group.security_group_id.id]
+  security_groups    = [module.security_group.security_group_id]
   subnets            = [for subnet in var.subnets : subnet.id]
 
   enable_deletion_protection = true
@@ -37,7 +37,7 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "app_blue" {
-  name        = "${var.alb_name}-app_blue-tg"
+  name        = "${var.alb_name}-app-blue-tg"
   target_type = "instance"
   port        = var.target_port
   protocol    = "TCP"
@@ -57,7 +57,7 @@ resource "aws_lb_target_group" "app_blue" {
 }
 
 resource "aws_lb_target_group" "app_green" {
-  name        = "${var.alb_name}-app_green-tg"
+  name        = "${var.alb_name}-app-green-tg"
   target_type = "instance"
   port        = var.target_port
   protocol    = "TCP"
