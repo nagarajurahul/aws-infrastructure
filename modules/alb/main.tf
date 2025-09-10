@@ -46,7 +46,7 @@ resource "aws_lb_target_group" "app_blue" {
   name        = "${var.alb_name}-app-blue-tg"
   target_type = "instance"
   port        = var.target_port
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
   target_health_state {
@@ -65,7 +65,7 @@ resource "aws_lb_target_group" "app_green" {
   name        = "${var.alb_name}-app-green-tg"
   target_type = "instance"
   port        = var.target_port
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
   target_health_state {
