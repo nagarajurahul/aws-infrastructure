@@ -16,10 +16,58 @@ module "vpc" {
   db_subnets         = var.db_subnets
 }
 
-resource "aws_s3_bucket" "sample_bucket" {
-  bucket = "my-sample-bucket-app-test-terraform-aws-infrastructure"
+resource "aws_s3_bucket" "s3" {
+  bucket = "my-s3-bucket-app-test-terraform-aws-infrastructure"
 
   tags = var.tags
+}
+
+resource "aws_s3_bucket_policy" "allow_access_from_alb" {
+  bucket = aws_s3_bucket.s3.id
+  policy = data.aws_iam_policy_document.allow_access_from_alb.json
+}
+
+data "aws_iam_policy_document" "allow_access_from_alb" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["logdelivery.elasticloadbalancing.amazonaws.com"]
+    }
+
+    actions = [
+      "s3:PutObject"
+    ]
+
+    # Only allow PutObject to objects within the bucket
+    resources = [
+      "${aws_s3_bucket.s3.arn}/*"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["logdelivery.elasticloadbalancing.amazonaws.com"]
+    }
+
+    actions = [
+      "s3:GetBucketAcl"
+    ]
+
+    # This action applies to the bucket itself
+    resources = [
+      aws_s3_bucket.s3.arn
+    ]
+  }
+}
+
+resource "aws_s3_bucket_policy" "allow_access_from_alb" {
+  bucket = aws_s3_bucket.s3.id
+  policy = data.aws_iam_policy_document.allow_access_from_alb.json
 }
 
 module "alb" {
@@ -31,7 +79,7 @@ module "alb" {
   alb_name                    = var.alb_name
   internal                    = var.internal
   subnets                     = module.vpc.public_subnets
-  s3_bucket_id                = aws_s3_bucket.sample_bucket.id
+  s3_bucket_id                = aws_s3_bucket.s3.id
   target_port                 = var.target_port
 }
 
