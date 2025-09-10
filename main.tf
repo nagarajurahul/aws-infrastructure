@@ -24,7 +24,7 @@ module "alb" {
   tags = var.tags
   alb_name = "app"
   internal = false
-  subnet = module.vpc.public_subnets
+  subnets = module.vpc.public_subnets
   alb_ingress_cidrs = ["0.0.0.0/0"]
   target_port = 8080
   s3_bucket_id = "ABC..."
