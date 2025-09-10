@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "asg" {
   name = "${var.asg_name}-asg"
 
   # availability_zones = var.azs
-  vpc_zone_identifier = [for subnet in var.subnets : subnet.id]
+  vpc_zone_identifier = var.subnets
   desired_capacity     = var.desired_capacity
   max_size             = var.max_size
   min_size             = var.min_size
