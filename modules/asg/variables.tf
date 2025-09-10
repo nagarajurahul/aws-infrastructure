@@ -50,3 +50,35 @@ variable "user_data" {
   
   default     = ""
 }
+
+variable "asg_name" {
+  description = "Name for the Auto Scaling Group"
+  type        = string
+}
+
+variable "subnets" {
+  description = "List of subnets where instances will be launched"
+  type        = list(object({
+    id = string
+  }))
+}
+
+variable "desired_capacity" {
+  description = "The number of instances that should be running in the ASG"
+  type        = number
+}
+
+variable "max_size" {
+  description = "The maximum number of instances in the ASG"
+  type        = number
+}
+
+variable "min_size" {
+  description = "The minimum number of instances in the ASG"
+  type        = number
+}
+
+variable "target_group_arns" {
+  description = "List of ALB/NLB target group ARNs to associate with the ASG"
+  type        = list(string)
+}
