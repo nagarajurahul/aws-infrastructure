@@ -1,10 +1,16 @@
 variable "vpc_id" {
-  
+  description = "VPC ID where the ALB will be created"
+  type        = string
 }
 
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
+}
+
+variable "alb_name" {
+  description = "Name prefix for ALB"
+  type        = string
 }
 
 variable "internal" {
@@ -13,7 +19,7 @@ variable "internal" {
 }
 
 variable "subnets" {
-  description = "Subnets for the ALB"
+  description = "List of Subnets for the ALB"
   type        = list(string)    
 }
 
