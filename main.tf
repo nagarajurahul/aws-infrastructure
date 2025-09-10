@@ -30,7 +30,7 @@ module "alb" {
   alb_ingress_cidr            = var.alb_ingress_cidr
   alb_name                    = var.alb_name
   internal                    = var.internal
-  subnets                     = module.vpc.public_subnets
+  subnets                     = [for subnet in module.vpc.public_subnets: subnet.id]
   s3_bucket_id                = aws_s3_bucket.sample_bucket.id
   target_port                 = var.target_port
   unhealthy_draining_interval = var.unhealthy_draining_interval
@@ -51,7 +51,7 @@ module "asg" {
   user_data        = var.user_data
 
   asg_name          = var.asg_name
-  subnets           = module.vpc.private_subnets
+  subnets           = [for subnet in module.vpc.private_subnets: subnet.id]
   desired_capacity  = var.desired_capacity
   max_size          = var.max_size
   min_size          = var.min_size

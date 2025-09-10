@@ -62,10 +62,8 @@ variable "asg_name" {
 }
 
 variable "subnets" {
-  description = "List of subnets where instances will be launched"
-  type = list(object({
-    id = string
-  }))
+  description = "List of Subnets for the ASG"
+  type        = list(string)
 }
 
 variable "desired_capacity" {

@@ -18,7 +18,7 @@ resource "aws_lb" "alb" {
   internal           = var.internal
   load_balancer_type = "application"
   security_groups    = [module.security_group.security_group_id]
-  subnets            = [for subnet in var.subnets : subnet.id]
+  subnets            = var.subnets
 
   enable_deletion_protection = true
 
