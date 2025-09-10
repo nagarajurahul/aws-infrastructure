@@ -67,16 +67,6 @@ variable "internal" {
   default     = true
 }
 
-variable "subnets" {
-  description = "List of Subnets for the ALB"
-  type        = list(string)
-}
-
-variable "s3_bucket_id" {
-  description = "S3 Bucket ID"
-  type        = string
-}
-
 variable "target_port" {
   description = "Target port for the ALB Target Group"
   type        = number
@@ -89,4 +79,60 @@ variable "unhealthy_draining_interval" {
   type        = number
 
   default = 60
+}
+
+variable "type" {
+  description = "Type of the application"
+  type        = string
+}
+
+variable "ami_id" {
+  description = "The AMI ID to use for launching EC2 instances"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "The EC2 instance type to use (e.g., t3.micro, m5.large)"
+  type        = string
+}
+
+variable "hibernation_mode" {
+  description = "Whether to enable hibernation support for the instances (only supported on certain instance families/AMIs)"
+  type        = bool
+
+  default = false
+}
+
+variable "key_name" {
+  description = "Name of the SSH key pair to associate with the instances"
+  type        = string
+
+  default = null
+}
+
+variable "user_data" {
+  description = "User data script to run at boot time (plain text, will be base64 encoded automatically)"
+  type        = string
+
+  default = ""
+}
+
+variable "asg_name" {
+  description = "Name for the Auto Scaling Group"
+  type        = string
+}
+
+variable "desired_capacity" {
+  description = "The number of instances that should be running in the ASG"
+  type        = number
+}
+
+variable "max_size" {
+  description = "The maximum number of instances in the ASG"
+  type        = number
+}
+
+variable "min_size" {
+  description = "The minimum number of instances in the ASG"
+  type        = number
 }

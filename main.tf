@@ -41,8 +41,6 @@ module "asg" {
   type                      = var.type
   ami_id                    = var.ami_id
   instance_type             = var.instance_type
-  vpc_security_group_ids    = var.vpc_security_group_ids
-  iam_instance_profile_name = var.iam_instance_profile_name
   hibernation_mode          = var.hibernation_mode
   key_name                  = var.key_name
   user_data                 = var.user_data
