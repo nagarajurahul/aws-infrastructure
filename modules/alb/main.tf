@@ -38,7 +38,7 @@ resource "aws_lb" "alb" {
 resource "aws_lb_target_group" "app_blue" {
   name        = "${var.alb_name}-app_blue-tg"
   target_type = "instance"
-  port        = var.target_group
+  port        = var.target_port
   protocol    = "TCP"
   vpc_id      = aws_vpc.main.id
 
@@ -58,7 +58,7 @@ resource "aws_lb_target_group" "app_blue" {
 resource "aws_lb_target_group" "app_green" {
   name        = "${var.alb_name}-app_green-tg"
   target_type = "instance"
-  port        = var.target_group
+  port        = var.target_port
   protocol    = "TCP"
   vpc_id      = aws_vpc.main.id
 

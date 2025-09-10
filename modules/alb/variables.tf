@@ -33,7 +33,7 @@ variable "s3_bucket_id" {
     type = string
 }
 
-variable "target_group" {
+variable "target_port" {
     description = "Target port for the ALB"
     type = number
 }
