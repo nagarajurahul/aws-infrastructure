@@ -34,3 +34,23 @@ resource "aws_lb" "alb" {
     }
   )
 }
+
+resource "aws_lb_target_group" "lb" {
+  name        = "${var.alb_name}-tg"
+  target_type = "instance"
+  port        = 80
+  protocol    = "TCP"
+  vpc_id      = aws_vpc.main.id
+
+  target_health_state = {
+    enable_unhealthy_connection_termination = true
+    unhealthy_draining_interval = 60
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.alb_name}-alb"
+    }
+  )
+}
