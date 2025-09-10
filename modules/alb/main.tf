@@ -43,7 +43,7 @@ resource "aws_lb_target_group" "app_blue" {
   protocol    = "TCP"
   vpc_id      = var.vpc_id
 
-  target_health_state = {
+  target_health_state {
     enable_unhealthy_connection_termination = true
     unhealthy_draining_interval = 60
   }
@@ -63,7 +63,7 @@ resource "aws_lb_target_group" "app_green" {
   protocol    = "TCP"
   vpc_id      = var.vpc_id
 
-  target_health_state = {
+  target_health_state {
     enable_unhealthy_connection_termination = true
     unhealthy_draining_interval = 60
   }
