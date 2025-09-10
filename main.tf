@@ -16,6 +16,12 @@ module "vpc" {
   db_subnets         = var.db_subnets
 }
 
+resource "aws_s3_bucket" "sample_bucket" {
+  bucket = "my-sample-bucket-app-test-terraform-aws-infrastructure"
+
+  tags = var.tags
+}
+
 module "alb" {
   source = "./modules/alb"
 
@@ -25,7 +31,7 @@ module "alb" {
   alb_name                    = var.alb_name
   internal                    = var.internal
   subnets                     = module.vpc.public_subnets
-  s3_bucket_id                = var.s3_bucket_id
+  s3_bucket_id                = aws_s3_bucket.sample_bucket.id
   target_port                 = var.target_port
   unhealthy_draining_interval = var.unhealthy_draining_interval
 }
