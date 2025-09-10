@@ -14,13 +14,13 @@ variable "alb_name" {
 }
 
 variable "internal" {
-    description = "Internal or public facing ALB"
-    default = true
+  description = "Internal or public facing ALB"
+  default     = true
 }
 
 variable "subnets" {
   description = "List of Subnets for the ALB"
-  type        = list(string)    
+  type        = list(string)
 }
 
 variable "alb_ingress_cidr" {
@@ -29,11 +29,11 @@ variable "alb_ingress_cidr" {
 }
 
 variable "s3_bucket_id" {
-    description = "S3 Bucket ID"
-    type = string
+  description = "S3 Bucket ID"
+  type        = string
 }
 
 variable "target_port" {
-    description = "Target port for the ALB"
-    type = number
+  description = "Target port for the ALB"
+  type        = number
 }

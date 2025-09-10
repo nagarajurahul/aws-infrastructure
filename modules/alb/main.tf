@@ -1,16 +1,16 @@
-module "security_group"{
-    source = "../security-group"
+module "security_group" {
+  source = "../security-group"
 
-    type = "alb"
-    vpc_id = var.vpc_id
-    tags = var.tags
+  type   = "alb"
+  vpc_id = var.vpc_id
+  tags   = var.tags
 }
 
-module "security_group_rules"{
-    source = "../security-group-rules/alb"
+module "security_group_rules" {
+  source = "../security-group-rules/alb"
 
-    security_group_id = module.security_group.security_group_id
-    alb_ingress_cidr = var.alb_ingress_cidr
+  security_group_id = module.security_group.security_group_id
+  alb_ingress_cidr  = var.alb_ingress_cidr
 }
 
 resource "aws_lb" "alb" {
@@ -45,7 +45,7 @@ resource "aws_lb_target_group" "app_blue" {
 
   target_health_state {
     enable_unhealthy_connection_termination = true
-    unhealthy_draining_interval = 60
+    unhealthy_draining_interval             = 60
   }
 
   tags = merge(
@@ -65,7 +65,7 @@ resource "aws_lb_target_group" "app_green" {
 
   target_health_state {
     enable_unhealthy_connection_termination = true
-    unhealthy_draining_interval = 60
+    unhealthy_draining_interval             = 60
   }
 
   tags = merge(
