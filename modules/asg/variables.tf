@@ -1,3 +1,8 @@
+variable "vpc_id" {
+  description = "VPC ID where the ALB will be created"
+  type        = string
+}
+
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
@@ -11,6 +16,13 @@ variable "type" {
 variable "alb_security_group_id" {
   description = "ALB SG ID allowed to access app"
   type        = string
+}
+
+variable "app_port" {
+  description = "App port for the ASG"
+  type        = number
+
+  default = 8080
 }
 
 variable "ami_id" {

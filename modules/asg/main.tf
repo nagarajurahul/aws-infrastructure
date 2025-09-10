@@ -11,7 +11,7 @@ module "security_group_rules" {
 
   security_group_id = module.security_group.security_group_id
   alb_security_group_id = var.alb_security_group_id
-  app_port = var.target_port
+  app_port = var.app_port
 }
 
 module "iam" {
