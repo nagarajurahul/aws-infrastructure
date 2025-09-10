@@ -45,7 +45,6 @@ resource "aws_lb_target_group" "app_blue" {
 
   target_health_state {
     enable_unhealthy_connection_termination = true
-    unhealthy_draining_interval             = var.unhealthy_draining_interval
   }
 
   tags = merge(
@@ -65,7 +64,6 @@ resource "aws_lb_target_group" "app_green" {
 
   target_health_state {
     enable_unhealthy_connection_termination = true
-    unhealthy_draining_interval             = var.unhealthy_draining_interval
   }
 
   tags = merge(
