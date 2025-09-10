@@ -1,6 +1,6 @@
 # Internet Gateway
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   tags = merge(
     var.tags,
@@ -28,7 +28,7 @@ resource "aws_nat_gateway" "nat" {
 
 # Public route
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -54,7 +54,7 @@ resource "aws_route_table_association" "public" {
 resource "aws_route_table" "private" {
   count = length(var.private_subnets)
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   tags = merge(
     var.tags,
@@ -83,7 +83,7 @@ resource "aws_route_table_association" "private" {
 resource "aws_route_table" "db" {
   count = length(var.db_subnets)
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   tags = merge(
     var.tags,
