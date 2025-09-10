@@ -41,10 +41,12 @@ variable "public_subnets" {
   type        = list(string)
   description = "List of Public Subnet CIDRs"
 }
+
 variable "private_subnets" {
   type        = list(string)
   description = "List of Private Subnet CIDRs"
 }
+
 variable "db_subnets" {
   type        = list(string)
   description = "List of DB Subnet CIDRs"

@@ -27,4 +27,5 @@ module "alb" {
   alb_ingress_cidr = "0.0.0.0/0"
   target_port      = 8080
   s3_bucket_id     = "ABC..."
+  unhealthy_draining_interval = 60
 }
