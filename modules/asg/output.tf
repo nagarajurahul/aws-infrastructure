@@ -18,11 +18,6 @@ output "launch_template_id" {
   value       = module.launch_template.launch_template_id
 }
 
-output "launch_template_name" {
-  description = "Name of the Launch Template"
-  value       = module.launch_template.launch_template_name
-}
-
 output "launch_template_version" {
   description = "Version of the Launch Template"
   value       = "$Latest"

@@ -26,7 +26,7 @@ output "db_subnets" {
 
 output "alb_arn" {
   description = "ARN of the ALB"
-  value       = module.alb.alb.arn
+  value       = module.alb.alb_arn
 }
 
 output "alb_dns_name" {
@@ -67,11 +67,6 @@ output "iam_role_name" {
 output "launch_template_id" {
   description = "ID of the Launch Template used by ASG"
   value       = module.asg.launch_template_id
-}
-
-output "launch_template_name" {
-  description = "Name of the Launch Template"
-  value       = module.asg.launch_template_name
 }
 
 output "launch_template_version" {
