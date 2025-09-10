@@ -91,7 +91,7 @@ module "asg" {
   instance_type    = var.instance_type
   hibernation_mode = var.hibernation_mode
   key_name         = var.key_name
-  user_data_file        = var.user_data_file
+  user_data_file        = "${path.root}/${var.user_data_file}"
 
   asg_name          = var.asg_name
   subnets           = module.vpc.private_subnets
