@@ -41,7 +41,7 @@ module "asg" {
 
   tags             = var.tags
   type             = var.type
-  alb_security_group_id = module.alb.
+  alb_security_group_id = module.alb.alb_security_group_id
   ami_id           = var.ami_id
   instance_type    = var.instance_type
   hibernation_mode = var.hibernation_mode
