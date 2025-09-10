@@ -81,12 +81,12 @@ variable "target_port" {
   description = "Target port for the ALB Target Group"
   type        = number
 
-  default     = 8080
+  default = 8080
 }
 
 variable "unhealthy_draining_interval" {
   description = "unhealthy_draining_interval"
-  type = number
-  
+  type        = number
+
   default = 60
 }

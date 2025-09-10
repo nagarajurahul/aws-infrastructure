@@ -19,13 +19,13 @@ module "vpc" {
 module "alb" {
   source = "./modules/alb"
 
-  vpc_id           = module.vpc.vpc_id
-  tags             = var.tags
-  alb_ingress_cidr = var.alb_ingress_cidr
-  alb_name         = var.alb_name
-  internal         = var.internal
-  subnets          = module.vpc.public_subnets
-  s3_bucket_id     = var.s3_bucket_id
-  target_port      = var.target_port
+  vpc_id                      = module.vpc.vpc_id
+  tags                        = var.tags
+  alb_ingress_cidr            = var.alb_ingress_cidr
+  alb_name                    = var.alb_name
+  internal                    = var.internal
+  subnets                     = module.vpc.public_subnets
+  s3_bucket_id                = var.s3_bucket_id
+  target_port                 = var.target_port
   unhealthy_draining_interval = var.unhealthy_draining_interval
 }
