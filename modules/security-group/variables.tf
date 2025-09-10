@@ -1,9 +1,8 @@
 variable "vpc_id" {
-
+  description = "VPC ID where the Security Group will be created"
+  type        = string
 }
-variable "type" {
 
-}
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
