@@ -33,7 +33,6 @@ module "alb" {
   subnets                     = module.vpc.public_subnets
   s3_bucket_id                = aws_s3_bucket.sample_bucket.id
   target_port                 = var.target_port
-  unhealthy_draining_interval = var.unhealthy_draining_interval
 }
 
 module "asg" {
