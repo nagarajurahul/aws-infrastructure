@@ -1,8 +1,8 @@
-variable "vpc_id"{
+variable "vpc_id" {
 
 }
 variable "type" {
-  
+
 }
 variable "tags" {
   description = "Common tags for all resources"
