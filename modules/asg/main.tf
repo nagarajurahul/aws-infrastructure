@@ -1,7 +1,7 @@
 module "iam" {
-    source = "../iam"
+  source = "../iam"
 
-    type   = "app"
+  type = "app"
 }
 
 module "launch_template" {
@@ -24,9 +24,9 @@ resource "aws_autoscaling_group" "asg" {
 
   # availability_zones = var.azs
   vpc_zone_indentifier = [for subnet in var.subnets : subnet.id]
-  desired_capacity   = var.desired_capacity
-  max_size           = var.max_size
-  min_size           = var.min_size
+  desired_capacity     = var.desired_capacity
+  max_size             = var.max_size
+  min_size             = var.min_size
 
   launch_template {
     id      = module.launch_template.launch_template_id

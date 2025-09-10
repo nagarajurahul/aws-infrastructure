@@ -27,28 +27,28 @@ variable "iam_instance_profile_name" {
   description = "Name of the IAM instance profile to associate with the instances"
   type        = string
 
-  default     = null
+  default = null
 }
 
 variable "hibernation_mode" {
   description = "Whether to enable hibernation support for the instances (only supported on certain instance families/AMIs)"
   type        = bool
 
-  default     = false
+  default = false
 }
 
 variable "key_name" {
   description = "Name of the SSH key pair to associate with the instances"
   type        = string
 
-  default     = null
+  default = null
 }
 
 variable "user_data" {
   description = "User data script to run at boot time (plain text, will be base64 encoded automatically)"
   type        = string
-  
-  default     = ""
+
+  default = ""
 }
 
 variable "asg_name" {
@@ -58,7 +58,7 @@ variable "asg_name" {
 
 variable "subnets" {
   description = "List of subnets where instances will be launched"
-  type        = list(object({
+  type = list(object({
     id = string
   }))
 }
