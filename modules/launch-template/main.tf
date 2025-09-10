@@ -29,6 +29,8 @@ resource "aws_launch_template" "launch_template"{
         name = var.iam_instance_profile_name
     }
 
+    user_data = filebase64(var.user_data_file)
+
     tag_specifications {
         resource_type = "instance"
 

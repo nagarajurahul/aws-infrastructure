@@ -31,7 +31,7 @@ module "launch_template" {
   iam_instance_profile_name = module.iam.iam_instance_profile_name
   hibernation_mode          = var.hibernation_mode
   key_name                  = var.key_name
-  user_data                 = var.user_data
+  user_data_file                 = var.user_data_file
 }
 
 

@@ -49,11 +49,8 @@ variable "key_name" {
   default = null
 }
 
-variable "user_data" {
-  description = "User data script to run at boot time (plain text, will be base64 encoded automatically)"
+variable "user_data_file" {
   type        = string
-
-  default = ""
 }
 
 variable "asg_name" {
