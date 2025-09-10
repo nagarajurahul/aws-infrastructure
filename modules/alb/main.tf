@@ -95,4 +95,5 @@ resource "aws_lb_listener" "app" {
         weight = 0
       }
     }
-  }}
+  }
+}
