@@ -15,7 +15,7 @@ variable "alb_name" {
 
 variable "internal" {
     description = "Internal or public facing ALB"
-    default = false
+    default = true
 }
 
 variable "subnets" {
@@ -31,4 +31,9 @@ variable "alb_ingress_cidrs" {
 variable "s3_bucket_id" {
     description = "S3 Bucket ID"
     type = string
+}
+
+variable "target_group" {
+    description = "Target port for the ALB"
+    type = number
 }
