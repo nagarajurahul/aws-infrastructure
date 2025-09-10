@@ -21,11 +21,11 @@ module "alb" {
 
   vpc_id           = module.vpc.vpc_id
   tags             = var.tags
-  alb_name         = "app"
-  internal         = false
+  alb_ingress_cidr = var.alb_ingress_cidr
+  alb_name         = var.alb_name
+  internal         = var.internal
   subnets          = module.vpc.public_subnets
-  alb_ingress_cidr = "0.0.0.0/0"
-  target_port      = 8080
-  s3_bucket_id     = "ABC..."
-  unhealthy_draining_interval = 60
+  s3_bucket_id     = var.s3_bucket_id
+  target_port      = var.target_group
+  unhealthy_draining_interval = var.unhealthy_draining_interval
 }
