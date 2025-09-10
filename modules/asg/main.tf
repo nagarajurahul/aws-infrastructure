@@ -1,3 +1,19 @@
+module "security_group" {
+  source = "../security-group"
+
+  type   = "app"
+  vpc_id = var.vpc_id
+  tags   = var.tags
+}
+
+module "security_group_rules" {
+  source = "../security-group-rules/app"
+
+  security_group_id = module.security_group.security_group_id
+  alb_security_group_id = var.alb_security_group_id
+  app_port = var.target_port
+}
+
 module "iam" {
   source = "../iam"
 
@@ -11,7 +27,7 @@ module "launch_template" {
   type                      = var.type
   ami_id                    = var.ami_id
   instance_type             = var.instance_type
-  vpc_security_group_ids    = var.vpc_security_group_ids
+  vpc_security_group_ids    = [module.security_group.security_group_id]
   iam_instance_profile_name = module.iam.iam_instance_profile_name
   hibernation_mode          = var.hibernation_mode
   key_name                  = var.key_name
