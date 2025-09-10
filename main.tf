@@ -24,6 +24,7 @@ module "alb" {
   alb_ingress_cidr            = var.alb_ingress_cidr
   alb_name                    = var.alb_name
   internal                    = var.internal
+  alb_enable_deletion_protection = var.alb_enable_deletion_protection
   subnets                     = module.vpc.public_subnets
   s3_bucket_id                = var.s3_bucket_id
   target_port                 = var.target_port
