@@ -22,7 +22,7 @@ variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
 
-  default = { "Environment" = "Production" }
+  default = { "Environment" = "production" }
 }
 
 variable "enable_nat_gateway" {
