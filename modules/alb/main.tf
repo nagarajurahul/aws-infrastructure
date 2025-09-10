@@ -3,6 +3,7 @@ module "security_group"{
 
     type = "alb"
     vpc_id = var.vpc_id
+    tags = var.tags
 }
 
 module "security_group_rules"{
@@ -40,7 +41,7 @@ resource "aws_lb_target_group" "app_blue" {
   target_type = "instance"
   port        = var.target_port
   protocol    = "TCP"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   target_health_state = {
     enable_unhealthy_connection_termination = true
@@ -60,7 +61,7 @@ resource "aws_lb_target_group" "app_green" {
   target_type = "instance"
   port        = var.target_port
   protocol    = "TCP"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   target_health_state = {
     enable_unhealthy_connection_termination = true
