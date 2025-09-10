@@ -39,6 +39,7 @@ module "alb" {
 module "asg" {
   source = "./modules/asg"
 
+  vpc_id           = module.vpc.vpc_id
   tags             = var.tags
   type             = var.type
   alb_security_group_id = module.alb.alb_security_group_id
