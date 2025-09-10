@@ -67,6 +67,11 @@ variable "internal" {
   default     = true
 }
 
+variable "alb_enable_deletion_protection" {
+  description = "Enable deletion protection for ALB"
+  default     = true
+}
+
 variable "target_port" {
   description = "Target port for the ALB Target Group"
   type        = number

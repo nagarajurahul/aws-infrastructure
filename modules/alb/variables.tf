@@ -23,6 +23,11 @@ variable "internal" {
   default     = true
 }
 
+variable "alb_enable_deletion_protection" {
+  description = "Enable deletion protection for ALB"
+  default     = true
+}
+
 variable "subnets" {
   description = "List of Subnets for the ALB"
   type        = list(string)
