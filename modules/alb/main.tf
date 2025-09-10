@@ -35,8 +35,8 @@ resource "aws_lb" "alb" {
   )
 }
 
-resource "aws_lb_target_group" "lb" {
-  name        = "${var.alb_name}-tg"
+resource "aws_lb_target_group" "app_blue" {
+  name        = "${var.alb_name}-app_blue-tg"
   target_type = "instance"
   port        = 80
   protocol    = "TCP"
@@ -50,7 +50,49 @@ resource "aws_lb_target_group" "lb" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.alb_name}-alb"
+      Name = "${var.alb_name}-app_blue-tg"
     }
   )
 }
+
+resource "aws_lb_target_group" "app_green" {
+  name        = "${var.alb_name}-app_green-tg"
+  target_type = "instance"
+  port        = 80
+  protocol    = "TCP"
+  vpc_id      = aws_vpc.main.id
+
+  target_health_state = {
+    enable_unhealthy_connection_termination = true
+    unhealthy_draining_interval = 60
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.alb_name}-app_green-tg"
+    }
+  )
+}
+
+resource "aws_lb_listener" "app" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+
+  default_action {
+    type = "forward"
+
+    forward {
+      target_group {
+        arn    = aws_lb_target_group.app_blue.arn
+        weight = 100
+      }
+      target_group {
+        arn    = aws_lb_target_group.app_green.arn
+        weight = 0
+      }
+    }
+  }}
